@@ -1,29 +1,29 @@
 // @ts-check
-import { createConfigForNuxt } from "@nuxt/eslint-config/flat";
+import antfu from "@antfu/eslint-config";
+import withNuxt from "./.nuxt/eslint.config.mjs";
 
-// Run `npx @eslint/config-inspector` to inspect the resolved config interactively
-export default createConfigForNuxt({
-  features: {
-    // Rules for module authors
-    tooling: true,
-    // Rules for formatting
+export default withNuxt(
+  antfu({
+    type: "lib",
+
     stylistic: {
-      semi: true,
-      quotes: "double",
       indent: 2,
+      quotes: "double",
+      semi: true,
     },
-  },
-  dirs: {
-    src: [
-      "./",
-    ],
-  },
-})
-  .append(
-    {
-      rules: {
-        "vue/multi-word-component-names": "off",
-      },
+
+    typescript: true,
+    vue: {
+      a11y: true,
     },
-    // your custom flat config here...
-  );
+
+    jsonc: false,
+    yaml: false,
+
+    formatters: {
+      css: true,
+      html: true,
+      markdown: "prettier",
+    },
+  }),
+);
