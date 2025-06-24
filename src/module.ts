@@ -1,54 +1,15 @@
-import { defineNuxtModule, createResolver, addComponentsDir, addImportsDir } from "@nuxt/kit";
 import type { ComponentsDir } from "nuxt/schema";
+import type { TModuleOptions } from "./types";
+import { addComponentsDir, addImportsDir, createResolver, defineNuxtModule } from "@nuxt/kit";
 import fg from "fast-glob";
+import { DEFAULT_MODULE_OPTIONS } from "./defaults";
 
-export type ModuleOptions = {
-  baseDir: string;
-  autoImportTSSuffix: string;
-  autoImportVueSuffix: string | false;
-  layers: {
-    name: string;
-    hasSlices?: boolean;
-    suffix?: string;
-    prefix?: string;
-  }[];
-};
-
-export default defineNuxtModule<ModuleOptions>({
+export default defineNuxtModule<TModuleOptions>({
   meta: {
     name: "nuxt-fsd",
     configKey: "fsd",
   },
-  defaults: {
-    autoImportVueSuffix: "public",
-    autoImportTSSuffix: "public",
-    baseDir: "src",
-    layers: [
-      {
-        name: "shared",
-        prefix: "UI",
-      },
-      {
-        name: "entities",
-        hasSlices: true,
-      },
-      {
-        name: "features",
-        suffix: "Feature",
-        hasSlices: true,
-      },
-      {
-        name: "widgets",
-        suffix: "Widget",
-        hasSlices: true,
-      },
-      {
-        name: "pages",
-        suffix: "Page",
-        hasSlices: true,
-      },
-    ],
-  },
+  defaults: DEFAULT_MODULE_OPTIONS,
   async setup(_options, _nuxt) {
     const getSuffixComponentDir = (path: string): ComponentsDir => ({
       path,
@@ -61,40 +22,25 @@ export default defineNuxtModule<ModuleOptions>({
       },
     });
 
-    const getIndexComponentDir = (path: string, prefix: string = "", suffix: string = ""): ComponentsDir => ({
-      path,
-      pattern: `**/index.vue`,
-      extensions: ["vue"],
-      extendComponent(component) {
-        component.pascalName = `${prefix}${component.pascalName.replaceAll("Ui", "")}${suffix}`;
-        return component;
-      },
-    });
+    const layers = {
+      ...DEFAULT_MODULE_OPTIONS.layers,
+      ..._options.layers,
+    };
 
     const resolver = createResolver(import.meta.url);
-    const rootDir = resolver.resolve(_nuxt.options.rootDir, _options.baseDir);
+    const absRootDir = resolver.resolve(_nuxt.options.rootDir, _options.rootDir);
 
     const patterns: string[] = [];
-    if (_options.autoImportVueSuffix === false) {
-      for (const layer of _options.layers) {
-        addComponentsDir(
-          getIndexComponentDir(`${rootDir}/${layer.name}`, layer.prefix, layer.suffix),
-        );
-      }
-    }
-    else {
-      for (const layer of _options.layers) {
-        addComponentsDir(
-          getSuffixComponentDir(`${rootDir}/${layer.name}`),
-        );
-      }
-    }
 
-    for (const layer of _options.layers) {
-      const layerPattern = `**/${layer.name}`;
+    for (const [name, { hasSlices }] of Object.entries(layers)) {
+      addComponentsDir(
+        getSuffixComponentDir(`${absRootDir}/${name}`),
+      );
+
+      const layerPattern = `**/${name}`;
 
       patterns.push(`${layerPattern}/**/*.${_options.autoImportTSSuffix}.ts`);
-      if (layer.hasSlices) {
+      if (hasSlices) {
         patterns.push(`${layerPattern}/*/index.ts`);
       }
       else {
@@ -103,7 +49,7 @@ export default defineNuxtModule<ModuleOptions>({
     }
 
     const pathes = await fg(patterns, {
-      cwd: rootDir,
+      cwd: absRootDir,
       onlyFiles: true,
       absolute: true,
     });
