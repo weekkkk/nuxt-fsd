@@ -41,10 +41,10 @@ export default defineNuxtModule<TModuleOptions>({
 
       patterns.push(`${layerPattern}/**/*.${_options.autoImportTSSuffix}.ts`);
       if (hasSlices) {
-        patterns.push(`${layerPattern}/*/index.ts`);
+        patterns.push(`${layerPattern}/*/index.${_options.autoImportTSSuffix}.ts`);
       }
       else {
-        patterns.push(`${layerPattern}/index.ts`);
+        patterns.push(`${layerPattern}/index.${_options.autoImportTSSuffix}.ts`);
       }
     }
 
