@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { entityForlderComponentImportUtil, EntityImportComponent, entityImportUtil } from "@/entities/entity";
+import { EntityFeatureImportComponent, entityFeatureImportUtil, entityForlderFeatureComponentImportUtil } from "@/features/entity";
 import { forlderComponentImportUtil, ImportComponent, importUtil } from "@/shared";
 </script>
 
@@ -93,6 +94,47 @@ import { forlderComponentImportUtil, ImportComponent, importUtil } from "@/share
     </p>
     <p>
       {{ entityForlderComponentImportUtil() }}
+    </p>
+  </section>
+
+  <section>
+    <h1>features</h1>
+
+    <h2>utils</h2>
+    <p>
+      {{ entityFeaturePublicIndexUtil() }}
+    </p>
+    <p>
+      {{ entityFeatureImportUtil() }}
+    </p>
+    <p>
+      {{ entityFeaturePublicUtil() }}
+    </p>
+
+    <h2>ui</h2>
+    <p>
+      <EntityFeaturePascalCaseComponent />
+    </p>
+    <p>
+      <entity-feature-kebab-case-component />
+    </p>
+    <p>
+      <EntityFolderFeaturePascalCaseComponent />
+    </p>
+    <p>
+      <entity-folder-feature-kebab-case-component />
+    </p>
+    <p>
+      {{ entityForlderFeatureComponentPublicUtil() }}
+    </p>
+    <p>
+      {{ entityForlderFeatureComponentPublicIndexUtil() }}
+    </p>
+    <p>
+      <EntityFeatureImportComponent />
+    </p>
+    <p>
+      {{ entityForlderFeatureComponentImportUtil() }}
     </p>
   </section>
 </template>
