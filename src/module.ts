@@ -22,17 +22,17 @@ export default defineNuxtModule<TModuleOptions>({
       },
     });
 
-    const layers = {
+    const layers = Array.from(new Set([
       ...DEFAULT_MODULE_OPTIONS.layers,
       ..._options.layers,
-    };
+    ]));
 
     const resolver = createResolver(import.meta.url);
     const absRootDir = resolver.resolve(_nuxt.options.rootDir, _options.rootDir);
 
     const patterns: string[] = [];
 
-    for (const [name, { hasSlices }] of Object.entries(layers)) {
+    for (const name of layers) {
       addComponentsDir(
         getSuffixComponentDir(`${absRootDir}/${name}`),
       );
@@ -40,12 +40,6 @@ export default defineNuxtModule<TModuleOptions>({
       const layerPattern = `**/${name}`;
 
       patterns.push(`${layerPattern}/**/*.${_options.autoImportTSSuffix}.ts`);
-      if (hasSlices) {
-        patterns.push(`${layerPattern}/*/index.${_options.autoImportTSSuffix}.ts`);
-      }
-      else {
-        patterns.push(`${layerPattern}/index.${_options.autoImportTSSuffix}.ts`);
-      }
     }
 
     const pathes = await fg(patterns, {
