@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { entityForlderComponentImportUtil, EntityImportComponent, entityImportUtil } from "@/entities/entity";
-import { ImportComponent, importUtil } from "@/shared";
+import { forlderComponentImportUtil, ImportComponent, importUtil } from "@/shared";
 </script>
 
 <template>
@@ -45,7 +45,13 @@ import { ImportComponent, importUtil } from "@/shared";
       {{ forlderComponentPublicUtil() }}
     </p>
     <p>
+      {{ forlderComponentPublicIndexUtil() }}
+    </p>
+    <p>
       <ImportComponent />
+    </p>
+    <p>
+      {{ forlderComponentImportUtil() }}
     </p>
   </section>
 

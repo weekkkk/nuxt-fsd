@@ -1,2 +1,2 @@
-export { ImportComponent } from "./ui";
+export { forlderComponentImportUtil, ImportComponent } from "./ui";
 export { importUtil } from "./utils";
