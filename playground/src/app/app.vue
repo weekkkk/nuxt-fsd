@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { entityForlderComponentImportUtil, EntityImportComponent, entityImportUtil } from "@/entities/entity";
-import { EntityFeatureImportComponent, entityFeatureImportUtil, entityForlderFeatureComponentImportUtil } from "@/features/entity";
+import { entityFeatureImportUtil, entityForlderFeatureComponentImportUtil } from "@/features/entity";
 import { forlderComponentImportUtil, ImportComponent, importUtil } from "@/shared";
+import { entityForlderWidgetComponentImportUtil, EntityWidgetImportComponent, entityWidgetImportUtil } from "@/widgets/entity";
 </script>
 
 <template>
@@ -138,6 +139,50 @@ import { forlderComponentImportUtil, ImportComponent, importUtil } from "@/share
     </p>
     <p>
       <Feature />
+    </p>
+  </section>
+
+  <section>
+    <h1>widgets</h1>
+
+    <h2>utils</h2>
+    <p>
+      {{ entityWidgetPublicIndexUtil() }}
+    </p>
+    <p>
+      {{ entityWidgetImportUtil() }}
+    </p>
+    <p>
+      {{ entityWidgetPublicUtil() }}
+    </p>
+
+    <h2>ui</h2>
+    <p>
+      <EntityWidgetPascalCaseComponent />
+    </p>
+    <p>
+      <entity-widget-kebab-case-component />
+    </p>
+    <p>
+      <EntityFolderWidgetPascalCaseComponent />
+    </p>
+    <p>
+      <entity-folder-widget-kebab-case-component />
+    </p>
+    <p>
+      {{ entityForlderWidgetComponentPublicUtil() }}
+    </p>
+    <p>
+      {{ entityForlderWidgetComponentPublicIndexUtil() }}
+    </p>
+    <p>
+      <EntityWidgetImportComponent />
+    </p>
+    <p>
+      {{ entityForlderWidgetComponentImportUtil() }}
+    </p>
+    <p>
+      <Widget />
     </p>
   </section>
 </template>
