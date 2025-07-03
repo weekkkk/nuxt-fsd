@@ -136,5 +136,8 @@ import { forlderComponentImportUtil, ImportComponent, importUtil } from "@/share
     <p>
       {{ entityForlderFeatureComponentImportUtil() }}
     </p>
+    <p>
+      <Feature />
+    </p>
   </section>
 </template>
