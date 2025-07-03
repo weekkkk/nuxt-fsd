@@ -1,0 +1,3 @@
+<template>
+  EntityWidgetImportComponent.vue
+</template>
