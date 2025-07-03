@@ -53,5 +53,7 @@ export default defineNuxtModule<TModuleOptions>({
     for (const dir of importDirs) {
       addImportsDir(dir);
     }
+
+    _nuxt.options.dir.pages = `${absRootDir}/app/routes`;
   },
 });
