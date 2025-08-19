@@ -4,4 +4,5 @@ export default defineNuxtConfig({
   modules: [
     fsd,
   ],
+  srcDir: "src",
 });

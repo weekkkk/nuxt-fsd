@@ -8,6 +8,9 @@ export default defineNuxtModule<TModuleOptions>({
   meta: {
     name: "nuxt-fsd",
     configKey: "fsd",
+    compatibility: {
+      nuxt: "^3.0.0",
+    },
   },
   defaults: DEFAULT_MODULE_OPTIONS,
   async setup(_options, _nuxt) {

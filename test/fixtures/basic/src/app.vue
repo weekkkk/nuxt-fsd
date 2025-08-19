@@ -8,7 +8,7 @@ import { entityForlderWidgetComponentImportUtil, EntityWidgetImportComponent, en
 <template>
   <section>
     <h1>
-      Nuxt FSD module playground!
+      Nuxt FSD module basic test!
     </h1>
 
     <p>
