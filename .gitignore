@@ -15,6 +15,7 @@ node_modules
 
 # Generated dirs
 dist
+nedelko-nuxt-fsd-*.tgz
 
 # Nuxt
 .nuxt
