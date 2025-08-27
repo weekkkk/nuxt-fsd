@@ -1,6 +1,6 @@
 {
-  "name": "nuxt-fsd",
-  "version": "1.0.0",
+  "name": "@nedelko/nuxt-fsd",
+  "version": "3.0.0",
   "description": "My new Nuxt module",
   "repository": "weekkkk/nuxt-fsd",
   "license": "MIT",
@@ -23,16 +23,23 @@
     "dist"
   ],
   "scripts": {
+    "release": "npm run lint && npm run test && npm run prepack && changelogen --release && npm publish && git push --follow-tags",
     "prepack": "nuxt-module-build build",
     "dev": "npm run dev:prepare && nuxi dev playground",
     "dev:build": "nuxi build playground",
     "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
-    "release": "npm run lint && npm run test && npm run prepack && changelogen --release && npm publish && git push --follow-tags",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "test": "vitest run",
     "test:watch": "vitest watch",
-    "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit"
+    "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit",
+    "release:alpha": "npm version prerelease --preid=alpha && npm publish --tag next",
+    "release:beta": "npm version prerelease --preid=beta && npm publish --tag next",
+    "release:rc": "npm version prerelease --preid=rc && npm publish --tag next",
+    "release:patch": "npm version patch && npm publish --tag latest",
+    "release:minor": "npm version minor && npm publish --tag latest",
+    "release:major": "npm version major && npm publish --tag latest",
+    "pack": "npm pack"
   },
   "dependencies": {
     "@nuxt/kit": "^3.0.0"
