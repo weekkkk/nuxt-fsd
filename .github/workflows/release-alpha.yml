@@ -43,3 +43,6 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: pnpm run release:alpha
+
+      - name: Push version bump
+        run: git push
