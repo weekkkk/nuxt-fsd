@@ -3,7 +3,7 @@ name: Release Alpha
 on:
   push:
     branches:
-      - feature/Lsl2xWdR
+      - develop
 
 permissions:
   contents: write
