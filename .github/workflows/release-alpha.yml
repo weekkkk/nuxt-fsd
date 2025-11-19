@@ -11,6 +11,7 @@ permissions:
 jobs:
   release-alpha:
     runs-on: ubuntu-latest
+    environment: develop
 
     steps:
       - name: Checkout repository
