@@ -23,8 +23,13 @@ jobs:
           node-version: 20
           registry-url: "https://registry.npmjs.org"
 
+      - name: Enable Corepack and pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@latest --activate
+
       - name: Install dependencies
-        run: npm i
+        run: pnpm install
 
       - name: Configure Git
         run: |
@@ -34,4 +39,4 @@ jobs:
       - name: Release alpha version
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm run release:alpha
+        run: pnpm run release:alpha
